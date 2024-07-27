@@ -1,6 +1,7 @@
 import '@/assets/styles/globals.css';
 import '@/components/Navbar';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 export const metadata = {
 	title: 'Project title',
@@ -14,6 +15,7 @@ const MainLayout = ({ children }) => {
 			<body>
 				<Navbar />
 				<main>{children}</main>
+				<Footer />
 			</body>
 		</html>
 	);
