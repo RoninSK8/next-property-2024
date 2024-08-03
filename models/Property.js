@@ -8,15 +8,15 @@ const PropertySchema = new Schema(
 			required: true,
 		},
 		name: {
-			type: string,
+			type: String,
 			required: true,
 		},
 		type: {
-			type: string,
+			type: String,
 			required: true,
 		},
 		description: {
-			type: string,
+			type: String,
 		},
 		location: {
 			street: {
