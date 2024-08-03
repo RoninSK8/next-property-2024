@@ -6,10 +6,11 @@ import { FaArrowLeft } from 'react-icons/fa';
 import PropertyHeaderImage from '@/components/PropertyHeaderImage';
 import Link from 'next/link';
 import PropertyDetails from '@/components/PropertyDetails';
+import Spinner from '@/components/Spinner';
 
 const PropertyPage = () => {
 	const { id } = useParams();
-	const [isLoading, setIsLoading] = useState(false);
+	const [loading, setLoading] = useState(true);
 	const [property, setProperty] = useState(null);
 	useEffect(() => {
 		const fetchPropertyData = async () => {
@@ -20,13 +21,13 @@ const PropertyPage = () => {
 			} catch (error) {
 				console.error('Error fetching property:', error);
 			} finally {
-				setIsLoading(false);
+				setLoading(false);
 			}
 		};
 		if (property === null) fetchPropertyData();
 	}, [property, id]);
 
-	if (!property && !isLoading) {
+	if (!property && !loading) {
 		return (
 			<h1 className="text-center text-2xl font-bold mt-10">
 				Property Not Found
@@ -35,7 +36,8 @@ const PropertyPage = () => {
 	}
 	return (
 		<>
-			{!isLoading && property && (
+			{loading && <Spinner loading={loading} />}
+			{!loading && property && (
 				<>
 					<PropertyHeaderImage image={property.images[0]} />
 					<section>
