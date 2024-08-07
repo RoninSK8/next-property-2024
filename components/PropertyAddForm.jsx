@@ -348,7 +348,7 @@ const PropertyAddForm = () => {
 								name="amenities"
 								value="Elevator Access"
 								className="mr-2"
-								checked={fields.amenities.includes('Elevator')}
+								checked={fields.amenities.includes('Elevator Access')}
 								onChange={handleAmenitiesChange}
 							/>
 							<label htmlFor="amenity_elevator_access">Elevator Access</label>
@@ -398,7 +398,7 @@ const PropertyAddForm = () => {
 								name="amenities"
 								value="Balcony/Patio"
 								className="mr-2"
-								checked={fields.amenities.includes('Balcony')}
+								checked={fields.amenities.includes('Balcony/Patio')}
 								onChange={handleAmenitiesChange}
 							/>
 							<label htmlFor="amenity_balcony_patio">Balcony/Patio</label>
