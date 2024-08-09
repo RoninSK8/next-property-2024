@@ -5,7 +5,10 @@ const fetchProperties = async () => {
 		if (!apiDomain) {
 			return [];
 		}
-		const res = await fetch(`${process.env.NEXT_PUBLIC_API_DOMAIN}/properties`);
+		const res = await fetch(
+			`${process.env.NEXT_PUBLIC_API_DOMAIN}/properties`,
+			{ cache: 'no-store' }
+		);
 		if (!res.ok) {
 			throw new Error('Failed to fetch data');
 		}
@@ -15,6 +18,7 @@ const fetchProperties = async () => {
 		return [];
 	}
 };
+
 const fetchProperty = async (id) => {
 	try {
 		if (!apiDomain) {
