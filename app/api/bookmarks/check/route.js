@@ -1,4 +1,5 @@
 import connectDB from '@/config/database';
+import Property from '@/models/Property';
 import User from '@/models/User';
 import { getSessionUser } from '@/utils/getSessionUser';
 
