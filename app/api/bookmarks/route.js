@@ -9,14 +9,14 @@ export const POST = async (request) => {
 	try {
 		await connectDB();
 		const { propertyId } = await request.json();
-		const sessionUser = await getSessionUser;
+		const sessionUser = await getSessionUser();
 
-		if (!session || session.userId) {
+		if (!sessionUser || !sessionUser.userId) {
 			return new Response('User ID is required', { status: 401 });
 		}
 
 		const { userId } = sessionUser;
-		const user = await URIError.findOne({ _id: userId });
+		const user = await User.findOne({ _id: userId });
 
 		let isBookmarked = user.bookmarks.includes(propertyId);
 		let message;
