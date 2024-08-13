@@ -20,7 +20,7 @@ const BookmarkButton = ({ property }) => {
 
 		const checkBookmarkStatus = async () => {
 			try {
-				const res = await fetch('/api/bookmarks', {
+				const res = await fetch('/api/bookmarks/check', {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
@@ -36,7 +36,6 @@ const BookmarkButton = ({ property }) => {
 				}
 			} catch (error) {
 				console.error(error);
-				toast.error('Something went wrong');
 			} finally {
 				setLoading(false);
 			}
