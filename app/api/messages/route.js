@@ -15,10 +15,10 @@ export const GET = async (request) => {
 		}
 		const { userId } = sessionUser;
 		const messages = await Message.find({ recioient: userId })
-			.populate('sender', 'name')
-			.populate('property', 'title');
+			.populate('sender', 'username')
+			.populate('property', 'name');
 
-		return new Response(JSON.stringify({ messages }), {
+		return new Response(JSON.stringify(messages), {
 			status: 200,
 		});
 	} catch (error) {
