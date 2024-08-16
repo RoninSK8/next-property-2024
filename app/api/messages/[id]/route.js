@@ -4,6 +4,42 @@ import { getSessionUser } from '@/utils/getSessionUser';
 
 export const dynamic = 'force-dynamic';
 
+// DELETE /api/messages/:id
+export const DELETE = async (request, { params }) => {
+	try {
+		await connectDB();
+		const messageId = params.id;
+		const sessionUser = await getSessionUser();
+
+		if (!sessionUser || !sessionUser.userId) {
+			return new Response('User ID is required', {
+				status: 401,
+			});
+		}
+
+		const { userId } = sessionUser;
+
+		const message = await Message.findById(messageId);
+		if (!message) return new Response('Message Not Found', { status: 404 });
+
+		// Verify ownership
+		if (message.recipient.toString() !== userId) {
+			return new Response('Unauthorized', { status: 401 });
+		}
+
+		await message.deleteOne();
+
+		return new Response('Message deleted', {
+			status: 200,
+		});
+	} catch (error) {
+		console.log(error);
+		return new Response('Something went wrong', {
+			status: 500,
+		});
+	}
+};
+
 // PUT /api/messages/:id
 export const PUT = async (request, { params }) => {
 	try {
