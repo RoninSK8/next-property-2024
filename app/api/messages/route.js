@@ -14,9 +14,18 @@ export const GET = async (request) => {
 			return new Response('User ID is required', { status: 401 });
 		}
 		const { userId } = sessionUser;
-		const messages = await Message.find({ recioient: userId })
+		const readMessages = await Message.find({ recipient: userId, read: true })
+			.sort({ createdAt: -1 }) // sort in asc order
 			.populate('sender', 'username')
 			.populate('property', 'name');
+		const unreadMessages = await Message.find({
+			recipient: userId,
+			read: false,
+		})
+			.sort({ createdAt: -1 }) // sort in asc order
+			.populate('sender', 'username')
+			.populate('property', 'name');
+		const messages = [...unreadMessages, ...readMessages];
 
 		return new Response(JSON.stringify(messages), {
 			status: 200,
