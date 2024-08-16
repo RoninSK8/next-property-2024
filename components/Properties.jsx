@@ -7,10 +7,13 @@ import { fetchProperties } from '@/utils/requests';
 const Properties = () => {
 	const [loading, setLoading] = useState(false);
 	const [properties, setProperties] = useState([]);
+	const [page, setPage] = useState(1);
+	const [pageSize, setPageSize] = useState(3);
+	const [totalItems, setTotalItems] = useState(0);
 
 	useEffect(() => {
 		const getProperties = async () => {
-			const properties = await fetchProperties();
+			const { properties } = await fetchProperties();
 			properties.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 			setProperties(properties);
 		};
